@@ -92,7 +92,7 @@ public class Category implements Comparable {
     static {   	
         categories.add(INTRODUCTION);
         categories.add(SKRIPSI);
-        
+        /*
         categories.add(GENERAL);
         categories.add(PARAMETER_TAMPERING);
         categories.add(ACCESS_CONTROL);
@@ -108,7 +108,7 @@ public class Category implements Comparable {
         categories.add(INSECURE_CONFIGURATION);
         categories.add(WEB_SERVICES);
         categories.add(AJAX_SECURITY);
-        
+        */
         categories.add(ADMIN_FUNCTIONS);
         /*
         categories.add(CODE_QUALITY);

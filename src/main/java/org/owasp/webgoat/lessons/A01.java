@@ -27,9 +27,18 @@ public class A01 extends SequentialLessonAdapter
 
     private String TARGET_USERID = UserTarget();
     
-    private final static String NONTARGET_USERID = "lsmith";
+    private int TARGET_VALUE = ValueTarget();
 
     private String userid;
+    
+    private static int ValueTarget() {
+		int y;
+		RandomGenerator rn = new RandomGenerator();
+		y = rn.generateNumber(99999);
+		y += 20000;
+		
+		return y;
+    }
     
     private static int acak = generateNumber();
         
@@ -89,13 +98,7 @@ public class A01 extends SequentialLessonAdapter
                 String before_salary_target_salary = target_results.getString(1);
                 
                 System.out.println("Before running query, salary for target userid " + TARGET_USERID + " = " + before_salary_target_salary );
-                    
-                target_results = target_statement.executeQuery("SELECT salary from salaries where userid='"+NONTARGET_USERID+"'");
-                target_results.first();
-                String before_salary_nontarget_salary = target_results.getString(1);
-                
-                System.out.println("Before running query, salary for nontarget userid " + NONTARGET_USERID + " = " + before_salary_nontarget_salary );
-                
+                     
                 // execute query
                 Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                                                                     ResultSet.CONCUR_READ_ONLY);
@@ -121,22 +124,12 @@ public class A01 extends SequentialLessonAdapter
                 String after_salary_target_salary = target_results.getString(1);
                 
                 System.out.println("After running query, salary for target userid " + TARGET_USERID + " = " + before_salary_target_salary );
-                    
-                target_results = target_statement.executeQuery("SELECT salary from salaries where userid='"+NONTARGET_USERID+"'");
-                target_results.first();
-                String after_salary_nontarget_salary = target_results.getString(1);
-                
-                System.out.println("After running query, salary for nontarget userid " + NONTARGET_USERID + " = " + before_salary_nontarget_salary );
-                
-                if(!after_salary_nontarget_salary.equals(before_salary_nontarget_salary)) {
-                    s.setMessage("You modified the salary for another userid, in order to succeed you must modify the salary of only userid " 
-                            + TARGET_USERID + ".");
-                } else {
-                    if(!after_salary_target_salary.equals(before_salary_target_salary)) {
-                        makeSuccess(s);
-                        String flag = getFlag();
-                    	s.setMessage("Flag{" + flag + "}");
-                    }
+
+                //if(!after_salary_target_salary.equals(before_salary_target_salary)) {
+                if(TARGET_VALUE == Integer.parseInt(after_salary_target_salary)) {
+                	makeSuccess(s);
+                    String flag = getFlag();
+                    s.setMessage("Flag{" + flag + "}");
                 }
         		
             } catch (SQLException sqle)
@@ -201,7 +194,8 @@ public class A01 extends SequentialLessonAdapter
     String instructions = "Form di bawah ini digunakan untuk menampilkan salary dengan memasukkan userid. "
         + "Terdapat celah keamanan berupa String SQL Injection di kolom input tersebut."
         + "Nama tabel yang digunakan adalah <b>salaries</b>. "
-        + "<br><b>Objective</b>: Gunakan SQL injection untuk mengubah salary pada userid <b>" + TARGET_USERID + "</b>.";
+        + "<br><b>Objective</b>: Gunakan SQL injection untuk mengubah salary pada userid <b>" + TARGET_USERID + "</b> "
+        		+ "menjadi " + TARGET_VALUE;
 
     return (instructions);
     }
