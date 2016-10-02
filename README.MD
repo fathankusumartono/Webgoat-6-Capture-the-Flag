@@ -1,3 +1,6 @@
+Webgoat 6 Capture the Flag (CTF) is a modified version of Webgoat 6.
+There are 10 tasks about information security based on the Top 10 OWASP vulnerabilities. After completing a task, you will get a Flag (32 random character). This Flag is used for validation and get a score. Every Flag will be submitted in Scoring System. The system will verify the Flag and give you a score. A complete total score for one user is 1000.
+
 # Important Information
 
 Thank you for downloading WebGoat!  This is the WebGoat Legacy version which is essentially the WebGoat 5 with a new UI. 
